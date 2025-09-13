@@ -71,7 +71,7 @@ export default async function(eleventyConfig) {
 			}
 		},
 		collection: {
-			name: "posts",
+			name: "post",
 			limit: 10,
 		},
 		metadata: {
