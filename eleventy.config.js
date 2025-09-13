@@ -78,9 +78,9 @@ export default async function(eleventyConfig) {
 			language: "en",
 			title: "Blog Title",
 			subtitle: "This is a longer description about your blog.",
-			base: "https://example.com/",
+			base: "https://Liu7749.github.io/Lewis-blog/",
 			author: {
-				name: "Your Name"
+				name: "Liu Liu",
 			}
 		}
 	});
@@ -131,6 +131,7 @@ export default async function(eleventyConfig) {
 export const config = {
 	// Control which files Eleventy will process
 	// e.g.: *.md, *.njk, *.html, *.liquid
+	pathPrefix: "/Lewis-blog/",
 	templateFormats: [
 		"md",
 		"njk",
