@@ -48,13 +48,11 @@
 			<nav>
         <h2 class="visually-hidden">Top level navigation menu</h2>
         <ul class="nav">
-			    <li class="nav-item"><a href="{{ '/' | url | normalizeUrl }}"{% if page.url == '/' or page.url == '/index.html' %} aria-current="page"{% endif %}>Home</a></li>
-			    <li class="nav-item"><a href="{{ '/blog/' | url | normalizeUrl }}"{% if page.url and (page.url.indexOf('/blog/') == 0) %} aria-current="page"{% endif %}>Archive</a></li>
-			    <li class="nav-item"><a href="{{ '/tags/' | url | normalizeUrl }}"{% if page.url and (page.url.indexOf('/tags/') == 0) %} aria-current="page"{% endif %}>Tags</a></li>
-			    <li class="nav-item"><a href="{{ '/about/' | url | normalizeUrl }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
-			    <li class="nav-item"><a href="{{ '/feed/feed.xml' | url | normalizeUrl }}">Feed</a></li>
-            </li>
-          {% endfor %}
+		    <li class="nav-item"><a href="{{ '/' | url | normalizeUrl }}"{% if page.url == '/' or page.url == '/index.html' %} aria-current="page"{% endif %}>Home</a></li>
+		    <li class="nav-item"><a href="{{ '/blog/' | url | normalizeUrl }}"{% if page.url and (page.url.indexOf('/blog/') == 0) %} aria-current="page"{% endif %}>Archive</a></li>
+		    <li class="nav-item"><a href="{{ '/tags/' | url | normalizeUrl }}"{% if page.url and (page.url.indexOf('/tags/') == 0) %} aria-current="page"{% endif %}>Tags</a></li>
+		    <li class="nav-item"><a href="{{ '/about/' | url | normalizeUrl }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
+		    <li class="nav-item"><a href="{{ '/feed/feed.xml' | url | normalizeUrl }}">Feed</a></li>
         </ul>
       </nav>
 		</header>
