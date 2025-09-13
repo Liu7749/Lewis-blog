@@ -3,6 +3,7 @@ import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import path from "path";
 
 import pluginFilters from "./_config/filters.js";
 
@@ -105,6 +106,34 @@ export default async function(eleventyConfig) {
 
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
+
+	// Explicit collections so templates can access blog posts as `collections.post` or `collections.posts`
+	// Use getAll() and filter by inputPath to avoid glob mismatches on different environments
+	eleventyConfig.addCollection("post", function(collectionApi) {
+		const items = collectionApi.getAll()
+			.filter(item => {
+				if(!item.inputPath) return false;
+				const normalized = item.inputPath.replace(/\\/g, '/');
+				return normalized.indexOf('content/blog/') !== -1;
+			})
+			.sort((a, b) => b.date - a.date);
+		// Debug: print how many posts we found for the 'post' collection
+		console.log(`DEBUG eleventy collection 'post' count: ${items.length}`);
+		return items;
+	});
+
+	// Alias plural 'posts' used in some templates
+	eleventyConfig.addCollection("posts", function(collectionApi) {
+		const items = collectionApi.getAll()
+			.filter(item => {
+				if(!item.inputPath) return false;
+				const normalized = item.inputPath.replace(/\\/g, '/');
+				return normalized.indexOf('content/blog/') !== -1;
+			})
+			.sort((a, b) => b.date - a.date);
+		console.log(`DEBUG eleventy collection 'posts' count: ${items.length}`);
+		return items;
+	});
 
 	// Normalize repeated repository path prefixes in generated URLs (collapse repeated /Lewis-blog segments)
 	eleventyConfig.addFilter("normalizeUrl", function(url) {
