@@ -1,46 +1,46 @@
 name: Deploy Eleventy to GitHub Pages
-  on:
-    push:
-      branches: [main]
+on:
+  push:
+    branches: [main]
 
-  permissions:
-    contents: read
-    pages: write
-    id-token: write
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-  concurrency:
-    group: pages
-    cancel-in-progress: true
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
-          with:
-            node-version: 20
-            cache: npm
-        - uses: actions/configure-pages@v5
-        - name: Install deps
-          run: npm ci
-        - name: Build Eleventy
-          run: npx @11ty/eleventy
-        - name: Verify build output
-          run: |
-            ls -lah _site || true
-            test -f _site/index.html || { echo "Missing _site/index.html"; exit 1; }
-        - name: Upload Pages Artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            path: _site
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/configure-pages@v5
+      - name: Install deps
+        run: npm ci
+      - name: Build Eleventy
+        run: npx @11ty/eleventy
+      - name: Verify build output
+        run: |
+          ls -lah _site || true
+          test -f _site/index.html || { echo "Missing _site/index.html"; exit 1; }
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
 
-    deploy:
-      needs: build
-      runs-on: ubuntu-latest
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-      steps:
-        - id: deployment
-          uses: actions/deploy-pages@v4
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
