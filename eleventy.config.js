@@ -117,8 +117,6 @@ export default async function(eleventyConfig) {
 				return normalized.indexOf('content/blog/') !== -1;
 			})
 			.sort((a, b) => b.date - a.date);
-		// Debug: print how many posts we found for the 'post' collection
-		console.log(`DEBUG eleventy collection 'post' count: ${items.length}`);
 		return items;
 	});
 
@@ -131,7 +129,6 @@ export default async function(eleventyConfig) {
 				return normalized.indexOf('content/blog/') !== -1;
 			})
 			.sort((a, b) => b.date - a.date);
-		console.log(`DEBUG eleventy collection 'posts' count: ${items.length}`);
 		return items;
 	});
 

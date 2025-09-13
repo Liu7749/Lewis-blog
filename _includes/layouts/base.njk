@@ -70,7 +70,6 @@
 		</footer>
 
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
-		{% getBundleFileUrl "js" as jsBundleUrl %}
-		<script type="module" src="{{ jsBundleUrl | normalizeUrl }}"></script>
+		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
 	</body>
 </html>
