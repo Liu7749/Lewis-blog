@@ -43,15 +43,16 @@
 		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
 
 		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
+			<a href="{{ '/' | url | replace('/Lewis-blog/Lewis-blog/','/Lewis-blog/') }}" class="home-link">{{ metadata.title }}</a>
 
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
 			<nav>
         <h2 class="visually-hidden">Top level navigation menu</h2>
         <ul class="nav">
-          {% for item in collections.all | eleventyNavigation %}
-            <li class="nav-item">
-              <a href="{{ item.url | url }}"{% if (item.url | url) == page.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+			    <li class="nav-item"><a href="{{ '/' | url }}"{% if page.url == '/' or page.url == '/index.html' %} aria-current="page"{% endif %}>Home</a></li>
+			    <li class="nav-item"><a href="{{ '/blog/' | url }}"{% if page.url startswith '/blog/' %} aria-current="page"{% endif %}>Archive</a></li>
+			    <li class="nav-item"><a href="{{ '/tags/' | url }}"{% if page.url startswith '/tags/' %} aria-current="page"{% endif %}>Tags</a></li>
+			    <li class="nav-item"><a href="{{ '/about/' | url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
+			    <li class="nav-item"><a href="{{ '/feed/feed.xml' | url }}">Feed</a></li>
             </li>
           {% endfor %}
         </ul>

@@ -1,14 +1,15 @@
-const eleventyNavigation = {
-	key: "Tags",
-	order: 4
-};
-title = "Tags";
 ---
+eleventyNavigation:
+  key: "Tags"
+  order: 4
+title: "Tags"
+---
+
 <h1>Tags</h1>
 
 <ul>
 {% for tag in collections | getKeys | filterTagList | sortAlphabetically %}
 	{% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a></li>
+	<li><a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a></li>
 {% endfor %}
 </ul>
