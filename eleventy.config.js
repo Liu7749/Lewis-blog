@@ -106,6 +106,12 @@ export default async function(eleventyConfig) {
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
 
+	// Normalize repeated repository path prefixes in generated URLs (collapse repeated /Lewis-blog segments)
+	eleventyConfig.addFilter("normalizeUrl", function(url) {
+		if(!url || typeof url !== "string") return url;
+		return url.replace(/(\/Lewis-blog)+/g, "/Lewis-blog");
+	});
+
 	eleventyConfig.addPlugin(IdAttributePlugin, {
 		// by default we use Eleventy’s built-in `slugify` filter:
 		// slugify: eleventyConfig.getFilter("slugify"),
